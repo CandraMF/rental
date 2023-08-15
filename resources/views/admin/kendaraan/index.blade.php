@@ -73,13 +73,16 @@
                                 Harga Sewa
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Status
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Aksi
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
-                        $i = ($kendaraans->currentpage()-1) * $kendaraans->perpage() + 1;
+                            $i = ($kendaraans->currentpage()-1) * $kendaraans->perpage() + 1;
                         @endphp
                         @forelse ($kendaraans as $kendaraan)
                         <tr class="bg-white border-b">
@@ -96,7 +99,14 @@
                                 {{ $kendaraan->no_stnk }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $kendaraan->harga_sewa }}
+                                Rp. {{ number_format($kendaraan->harga_sewa) }}
+                            </td>
+                            <td class="px-6 py-4">
+                                @if ($kendaraan->status == 1)
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Tersedia</span>
+                                @else
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Sedang Disewa</span>
+                                @endif
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex gap-2">
