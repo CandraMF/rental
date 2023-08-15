@@ -74,6 +74,14 @@ Route::middleware('auth')->group(function () {
 
 
     });
+
+    Route::middleware(['role:member'])->prefix('/member')->name('member.')->group(function () {
+        Route::get('/', [DashboardController::class, 'member'])->name('dashboard');
+    });
+
+    Route::middleware(['role:petugas'])->prefix('/petugas')->name('petugas.')->group(function () {
+        Route::get('/', [DashboardController::class, 'petugas'])->name('dashboard');
+    });
 });
 
 require __DIR__.'/auth.php';

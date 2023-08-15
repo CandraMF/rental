@@ -8,6 +8,16 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        return view('admin.dashboard');
+    }
+
+    public function member()
+    {
+        return view('member.dashboard');
+    }
+
+    public function petugas()
+    {
+        return view('petugas.dashboard');
     }
 }

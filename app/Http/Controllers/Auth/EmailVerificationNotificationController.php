@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmailVerificationNotificationController extends Controller
 {
@@ -15,7 +16,15 @@ class EmailVerificationNotificationController extends Controller
     public function store(Request $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME_ADMIN);
+            if(Auth::user()->getRoleNames()[0] == 'admin') {
+                return redirect()->intended(RouteServiceProvider::HOME_ADMIN);
+            } else if(Auth::user()->getRoleNames()[0] == 'petugas') {
+                return redirect()->intended(RouteServiceProvider::HOME_PETUGAS);
+            } else if(Auth::user()->getRoleNames()[0] == 'member') {
+                return redirect()->intended(RouteServiceProvider::HOME_MEMBER);
+            } else {
+                return redirect()->intended('/');
+            }
         }
 
         $request->user()->sendEmailVerificationNotification();

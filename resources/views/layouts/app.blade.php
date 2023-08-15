@@ -16,8 +16,17 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
 
+            @if(\Auth::user()->getRoleNames()[0] == 'admin') 
+                @include('layouts.navigation')
+            @elseif(\Auth::user()->getRoleNames()[0] == 'petugas') 
+                @include('layouts.navigationPetugas')
+            @elseif(\Auth::user()->getRoleNames()[0] == 'member') 
+                @include('layouts.navigationMember')
+            @else
+            
+            @endif
+            
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
