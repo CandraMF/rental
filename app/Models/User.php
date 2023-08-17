@@ -43,4 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'user_id', 'id');
+    }
+
+    public function petugas()
+    {
+        return $this->belongsTo(Petugas::class, 'user_id', 'id');
+    }
 }

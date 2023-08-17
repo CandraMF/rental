@@ -15,28 +15,28 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
 
-        // $role_admin = Role::create(['name' => 'admin']);
-        // $role_petugas = Role::create(['name' => 'petugas']);
-        // $role_member = Role::create(['name' => 'member']);
+        $role_admin = Role::create(['name' => 'admin']);
+        $role_petugas = Role::create(['name' => 'petugas']);
+        $role_member = Role::create(['name' => 'member']);
 
-        // $admin = \App\Models\User::factory()->create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@example.com',
-        // ]);
+        $admin = \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+        ]);
 
-        // $petugas = \App\Models\User::factory()->create([
-        //     'name' => 'Petugas',
-        //     'email' => 'petugas@example.com',
-        // ]);
+        $petugas = \App\Models\User::factory()->create([
+            'name' => 'Petugas',
+            'email' => 'petugas@example.com',
+        ]);
 
-        // $member = \App\Models\User::factory()->create([
-        //     'name' => 'Member',
-        //     'email' => 'member@example.com',
-        // ]);
+        $member = \App\Models\User::factory()->create([
+            'name' => 'Member',
+            'email' => 'member@example.com',
+        ]);
 
-        // $admin->assignRole('admin');
-        // $petugas->assignRole('petugas');
-        // $member->assignRole('member');
+        $admin->assignRole('admin');
+        $petugas->assignRole('petugas');
+        $member->assignRole('member');
 
     }
 }

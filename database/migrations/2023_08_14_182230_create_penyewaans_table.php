@@ -13,15 +13,18 @@ return new class extends Migration
     {
         Schema::create('penyewaans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('member_id')->constrained();
+            $table->bigInteger('member_id')->unsigned();
+            $table->bigInteger('petugas_id')->nullable()->unsigned();
             $table->foreignId('kendaraan_id')->constrained();
-            $table->foreignId('petugas_id')->constrained();
-            $table->foreignId('pengembalian_id')->constrained();
+            $table->foreignId('pengembalian_id')->nullable()->constrained();
             $table->date('tanggal_sewa');
             $table->integer('lama_sewa');
             $table->integer('total_bayar');
             $table->integer('uang_muka');
             $table->timestamps();
+
+            $table->foreign('member_id')->references('id')->on('users');
+            $table->foreign('petugas_id')->references('id')->on('users');
         });
     }
 

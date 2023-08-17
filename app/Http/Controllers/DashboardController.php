@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kendaraan;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -13,7 +14,11 @@ class DashboardController extends Controller
 
     public function member()
     {
-        return view('member.dashboard');
+        $kendaraans = Kendaraan::paginate(10);
+
+        return view('member.dashboard', [
+            'kendaraans' => $kendaraans
+        ]);
     }
 
     public function petugas()

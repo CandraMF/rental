@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\Member\MemberPenyewaanController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PenyewaanController;
 use App\Http\Controllers\PetugasController;
@@ -64,6 +65,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/penyewaan/{id}/update', [PenyewaanController::class, 'update'])->name('penyewaan.update');
         Route::delete('/penyewaan/{id}', [PenyewaanController::class, 'destroy'])->name('penyewaan.destroy');
 
+        Route::post('/penyewaan/terima', [PenyewaanController::class, 'terima'])->name('penyewaan.terima');
+        Route::post('/penyewaan/tolak', [PenyewaanController::class, 'tolak'])->name('penyewaan.tolak');
+
         Route::get('/user', [UserController::class, 'index'])->name('user.index');
         Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
         Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
@@ -71,12 +75,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
         Route::post('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
         Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
-
     });
 
     Route::middleware(['role:member'])->prefix('/member')->name('member.')->group(function () {
         Route::get('/', [DashboardController::class, 'member'])->name('dashboard');
+
+        Route::get('/penyewaan', [MemberPenyewaanController::class, 'index'])->name('penyewaan.index');
+        Route::get('/penyewaan/create', [MemberPenyewaanController::class, 'create'])->name('penyewaan.create');
+        Route::post('/penyewaan/store', [MemberPenyewaanController::class, 'store'])->name('penyewaan.store');
+        Route::get('/penyewaan/{id}', [MemberPenyewaanController::class, 'show'])->name('penyewaan.show');
+        Route::get('/penyewaan/{id}/edit', [MemberPenyewaanController::class, 'edit'])->name('penyewaan.edit');
+        Route::post('/penyewaan/{id}/update', [MemberPenyewaanController::class, 'update'])->name('penyewaan.update');
+        Route::delete('/penyewaan/{id}', [MemberPenyewaanController::class, 'destroy'])->name('penyewaan.destroy');
     });
 
     Route::middleware(['role:petugas'])->prefix('/petugas')->name('petugas.')->group(function () {

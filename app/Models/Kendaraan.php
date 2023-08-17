@@ -11,5 +11,8 @@ class Kendaraan extends Model
 
     protected $fillable = ['plat_nomor', 'no_stnk', 'nama_kendaraan', 'harga_sewa', 'status'];
 
-    
+    public function penyewaans()
+    {
+        return $this->hasMany(Penyewaan::class, 'kendaraan_id', 'id');
+    }
 }
