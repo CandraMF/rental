@@ -33,7 +33,9 @@ class DashboardController extends Controller
 
     public function member()
     {
-        $kendaraans = Kendaraan::paginate(10);
+        $kendaraans = Kendaraan::with(['penyewaans' => function($q){
+            $q->where('status', 0)->orWhere('status', 1);
+        }])->orderBy('status', 'asc')->paginate(10);
 
         return view('member.dashboard', [
             'kendaraans' => $kendaraans

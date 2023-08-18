@@ -15,9 +15,6 @@
                     <x-nav-link :href="route('member.dashboard')" :active="request()->routeIs('member.dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('member.penyewaan.index')" :active="request()->routeIs('member.penyewaan.index')">
-                        {{ __('Penyewaan') }}
-                    </x-nav-link>
                 </div>
             </div>
 
@@ -72,10 +69,7 @@
             <x-responsive-nav-link :href="route('member.dashboard')" :active="request()->routeIs('member.dashboard')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
-            
-            <x-responsive-nav-link :href="route('member.penyewaan.index')" :active="request()->routeIs('member.penyewaan.index')">
-                {{ __('Penyewaan') }}
-            </x-responsive-nav-link>
+
             
         </div>
 
