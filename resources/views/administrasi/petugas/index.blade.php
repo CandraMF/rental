@@ -119,7 +119,11 @@
                                 </td>
                             </tr>
                             @empty
-                            Data Kosong
+                            <tr>
+                                <td colspan="0" class="text-center p-5">
+                                    Data Kosong
+                                </td>
+                            </tr>
                             @endforelse
 
                         </tbody>
