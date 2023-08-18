@@ -72,8 +72,7 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg flex flex-col">
                 <div class="flex justify-between">
                     <div>
-                        <x-text-input id="email" name="email" type="email" class="block w-full" required autocomplete="search" placeholder="search" />
-                        <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                        
                     </div>
                 </div>
                 <div class="mt-5 relative overflow-x-auto">

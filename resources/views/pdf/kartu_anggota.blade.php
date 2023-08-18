@@ -4,73 +4,51 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style media="screen">
-        .page-break {
-            page-break-after: always;
-        }
-
         body {
-            font-family: 'Nunito', sans-serif;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        table,
-        th,
-        td {
-            border: 1px solid black;
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            border: 1.5px solid rgba(0, 0, 0, 0.1);
         }
 
-        table {
-            border-collapse: collapse;
+        .card h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
         }
 
-        th,
-        td {
-            padding: 6px 0;
-        }
-
-        th {
-            text-align: left;
-            padding-left: 4px;
-            background-color: #F1F1F1;
-        }
-
-        td {
-            padding-left: 4px;
-        }
-
-        .table-desc {
-            border: 0px !important;
-        }
-
-        .table-desc tr td {
-            border: none !important;
-        }
-
-        .table-desc tr {
-            border: none !important;
+        .card p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #777;
         }
     </style>
 </head>
 
 <body>
-    <caption>Kartu Member</caption>
-    <table style="width: 100%; margin-top: 42px">
-        <tr>
-            <th style="width: 40% !important;">Nama</th>
-            <td>{{ $member->nama }}</td>
-        </tr>
-        <tr>
-            <th>Nomor Telepon</th>
-            <td>{{ $member->no_telp }}</td>
-        </tr>
-        <tr>
-            <th>Tanggal Bergabung</th>
-            <td>{{ \Carbon\Carbon::parse($member->create_at)->format('d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <th>Berlaku Sampai</th>
-            <td>{{ \Carbon\Carbon::parse($member->create_at)->addYear(3)->format('d/m/Y') }}</td>
-        </tr>
-    </table>
+    <div class="card">
+        <div class="card-content">
+            <div>
+                <h1>{{ $member->nama }}</h1>
+                <p>berlaku s/d : {{ \Carbon\Carbon::parse($member->create_at)->format('d/m/Y') }}</p>
+                <p>{{ $member->alamat }}</p>
+                <p>{{ $member->no_telp }}</p>
+            </div>
+
+        </div>
+    </div>
 
 </body>
 
