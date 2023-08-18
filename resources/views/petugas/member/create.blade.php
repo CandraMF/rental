@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg flex flex-col">
-                <form method="post" action="{{ route('admin.petugas.store') }}" class="space-y-6">
+                <form method="post" action="{{ route('petugas.member.store') }}" class="space-y-6">
                     @csrf
                     @method('post')
                     <div class="grid grid-cols-2 gap-5">
@@ -51,7 +51,7 @@
                         <div></div>
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Simpan') }}</x-primary-button>
-                            <a href="{{ route('admin.petugas.index') }}">
+                            <a href="{{ route('petugas.member.index') }}">
                                 <x-secondary-button type="button">{{ __('Cancel') }}</x-secondary-button>
                             </a>
                         </div>

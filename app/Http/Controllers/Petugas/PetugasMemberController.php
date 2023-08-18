@@ -36,11 +36,11 @@ class PetugasMemberController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'no_ktp' => ['required', 'unique:'.Member::class],
-            'no_sim' => ['required', 'unique:'.Member::class],
-            'no_telp' => ['required', 'unique:'.Member::class],
+            'no_ktp' => ['required', 'max:16', 'min:16', 'unique:'.Member::class],
+            'no_sim' => ['required', 'max:12', 'min:12', 'unique:'.Member::class],
+            'no_telp' => ['required', 'max:225', 'unique:'.Member::class],
             'ttl' => ['required'],
             'alamat' => ['required', 'max:255'],
         ]);
@@ -90,8 +90,8 @@ class PetugasMemberController extends Controller
     {
         $validated = $request->validate([
             'nama' => ['required', 'string', 'max:255'],
-            'no_ktp' => ['required', Rule::unique(Member::class)->ignore($id)],
-            'no_sim' => ['required', Rule::unique(Member::class)->ignore($id)],
+            'no_ktp' => ['required', 'max:16', 'min:16', Rule::unique(Member::class)->ignore($id)],
+            'no_sim' => ['required', 'max:12', 'min:12', Rule::unique(Member::class)->ignore($id)],
             'no_telp' => ['required', Rule::unique(Member::class)->ignore($id)],
             'ttl' => ['required'],
             'alamat' => ['required', 'max:255'],

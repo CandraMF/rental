@@ -39,7 +39,7 @@ class PetugasKendaraanController extends Controller
             'plat_nomor' => 'required|unique:kendaraans',
             'no_stnk' => 'required|unique:kendaraans',
             'nama_kendaraan' => 'required',
-            'harga_sewa' => 'required',
+            'harga_sewa' => 'required|min:1',
         ]);
 
         $validated['status'] = 1;
@@ -82,7 +82,7 @@ class PetugasKendaraanController extends Controller
             'plat_nomor' => ['required', Rule::unique(Kendaraan::class)->ignore($id)],
             'no_stnk' => ['required', Rule::unique(Kendaraan::class)->ignore($id)],
             'nama_kendaraan' => ['required', ],
-            'harga_sewa' => ['required', ],
+            'harga_sewa' => ['required', 'min:1'],
         ]);
 
         $kendaraan = Kendaraan::find($id);

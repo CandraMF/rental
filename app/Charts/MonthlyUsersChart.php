@@ -21,7 +21,7 @@ class MonthlyUsersChart
             ->setTitle('Ketersediaan Kendaraan')
             ->addData([
                 Kendaraan::where('status', 1)->count(),
-                Kendaraan::where('status', 0)->count()
+                Kendaraan::where('status', 0)->orWhere('status', 2)->count()
             ])
             ->setLabels(['Tersedia', 'Sedang Dipinjam']);
     }
