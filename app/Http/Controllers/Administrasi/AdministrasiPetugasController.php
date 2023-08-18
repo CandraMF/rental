@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Petugas;
+namespace App\Http\Controllers\Administrasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\Member;
+use App\Models\Petugas;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
-class PetugasMemberController extends Controller
+class AdministrasiPetugasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $members = Member::paginate(10);
+        $petugass = Petugas::whereHas('user')->paginate(10);
 
-        return view('petugas.member.index', ['members' => $members]);
+        return view('administrasi.petugas.index', ['petugass' => $petugass]);
     }
 
     /**
@@ -27,7 +27,7 @@ class PetugasMemberController extends Controller
      */
     public function create()
     {
-        return view('petugas.member.create');
+        return view('administrasi.petugas.create');
     }
 
     /**
@@ -36,29 +36,27 @@ class PetugasMemberController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'no_ktp' => ['required', 'unique:'.Member::class],
-            'no_sim' => ['required', 'unique:'.Member::class],
-            'no_telp' => ['required', 'unique:'.Member::class],
-            'ttl' => ['required'],
-            'alamat' => ['required', 'max:255'],
+            'nama' => 'required',
+            'no_telp' => ['required', Rule::unique(Petugas::class)],
+            'email' => ['required', 'email', Rule::unique(User::class)],
+            'alamat' => 'required',
+            'ttl' => 'required',
         ]);
 
         $password = Hash::make('password');
 
-        $member = Member::create($request->except(['email']));
+        $petugas = Petugas::create($request->except(['email']));
 
         $user = User::create([
             'name' => $request->nama,
             'email' => $request->email,
             'password' => $password,
-            'user_id' => $member->id
+            'user_id' => $petugas->id
         ]);
 
-        $user->assignRole('member');
+        $user->assignRole('petugas');
 
-        return redirect(route('petugas.member.index'))->with([
+        return redirect(route('admin.petugas.index'))->with([
             'status' => 'saved'
         ]);
     }
@@ -76,10 +74,10 @@ class PetugasMemberController extends Controller
      */
     public function edit(string $id)
     {
-        $member = Member::with(['user'])->find($id);
+        $petugas = Petugas::with(['user'])->find($id);
 
-        return view('petugas.member.edit', [
-            'member' => $member
+        return view('administrasi.petugas.edit', [
+            'petugas' => $petugas
         ]);
     }
 
@@ -88,22 +86,21 @@ class PetugasMemberController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         $validated = $request->validate([
             'nama' => ['required', 'string', 'max:255'],
-            'no_ktp' => ['required', Rule::unique(Member::class)->ignore($id)],
-            'no_sim' => ['required', Rule::unique(Member::class)->ignore($id)],
-            'no_telp' => ['required', Rule::unique(Member::class)->ignore($id)],
+            'no_telp' => ['required', ],
             'ttl' => ['required'],
             'alamat' => ['required', 'max:255'],
         ]);
 
-        $member = Member::find($id);
+        $member = Petugas::find($id);
 
         $member->update($validated);
 
-        return redirect(route('petugas.member.index'))->with([
+        return redirect(route('admin.petugas.index'))->with([
             'status' => 'updated'
-        ]);
+        ]); 
     }
 
     /**
@@ -111,22 +108,22 @@ class PetugasMemberController extends Controller
      */
     public function destroy(string $id)
     {
-        $member = Member::find($id);
+        $petugas = Petugas::find($id);
 
-        $member->delete();
-        $member->user->delete();
+        $petugas->delete();
+        $petugas->user->delete();
 
-        return redirect(route('petugas.member.index'))->with([
+        return redirect(route('admin.petugas.index'))->with([
             'status' => 'deleted'
         ]);
     }
 
     public function cetakKartu(string $id)
     {
-        $member = Member::with(['user'])
+        $petugas = Petugas::with(['user'])
             ->find($id);
 
-        $pdf = PDF::loadView('pdf.kartu_anggota', compact('member'));
+        $pdf = PDF::loadView('pdf.kartu_anggota', compact('petugas'));
 
         $pdf->setPaper('A4', 'landscape');
 

@@ -1,16 +1,13 @@
 <?php
 
-use App\Http\Controllers\Administrasi\AdministrasiPengembalianController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\Member\MemberPenyewaanController;
-use App\Http\Controllers\MemberController;
 use App\Http\Controllers\Administrasi\AdministrasiPenyewaanController;
+use App\Http\Controllers\Administrasi\AdministrasiPetugasController;
 use App\Http\Controllers\Petugas\PetugasKendaraanController;
 use App\Http\Controllers\Petugas\PetugasMemberController;
 use App\Http\Controllers\Petugas\PetugasPengembalianController;
 use App\Http\Controllers\Petugas\PetugasPenyewaanController;
-use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
 
 use Illuminate\Support\Facades\Route;
@@ -102,13 +99,13 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/penyewaan/{id}/selesaikan', [AdministrasiPenyewaanController::class, 'selesaikan'])->name('penyewaan.selesaikan');
 
-        Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.index');
-        Route::get('/petugas/create', [PetugasController::class, 'create'])->name('petugas.create');
-        Route::post('/petugas/store', [PetugasController::class, 'store'])->name('petugas.store');
-        Route::get('/petugas/{id}', [PetugasController::class, 'show'])->name('petugas.show');
-        Route::get('/petugas/{id}/edit', [PetugasController::class, 'edit'])->name('petugas.edit');
-        Route::post('/petugas/{id}/update', [PetugasController::class, 'update'])->name('petugas.update');
-        Route::delete('/petugas/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
+        Route::get('/petugas', [AdministrasiPetugasController::class, 'index'])->name('petugas.index');
+        Route::get('/petugas/create', [AdministrasiPetugasController::class, 'create'])->name('petugas.create');
+        Route::post('/petugas/store', [AdministrasiPetugasController::class, 'store'])->name('petugas.store');
+        Route::get('/petugas/{id}', [AdministrasiPetugasController::class, 'show'])->name('petugas.show');
+        Route::get('/petugas/{id}/edit', [AdministrasiPetugasController::class, 'edit'])->name('petugas.edit');
+        Route::post('/petugas/{id}/update', [AdministrasiPetugasController::class, 'update'])->name('petugas.update');
+        Route::delete('/petugas/{id}', [AdministrasiPetugasController::class, 'destroy'])->name('petugas.destroy');
 
     });
 });

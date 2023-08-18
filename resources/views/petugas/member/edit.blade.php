@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg flex flex-col">
-                <form method="post" action="{{ route('petugas.member.store') }}" class="space-y-6">
+                <form method="post" action="{{ route('petugas.member.update', $member->id) }}" class="space-y-6">
                     @csrf
                     @method('post')
                     <div class="grid grid-cols-2 gap-5">
@@ -36,11 +36,6 @@
                             <x-input-label for="no_telp" :value="__('Nomor Telepon')" />
                             <x-text-input id="no_telp" :value="old('no_telp', $member->no_telp)" name="no_telp" type="text" class="mt-1 block w-full" autocomplete="no_telp" />
                             <x-input-error :messages="$errors->get('no_telp')" class="mt-2" />
-                        </div>
-                        <div class="cols-span-1">
-                            <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" :value="old('email', $member->user->email)" name="email" type="text" class="mt-1 block w-full" autocomplete="email" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                         
                         <div class="cols-span-1">
