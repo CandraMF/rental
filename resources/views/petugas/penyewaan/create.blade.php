@@ -106,7 +106,6 @@
                         </div>
                         <div class="flex justify-end flex-col items-end">
                             <div class="w-fit bg-blue-100 text-blue-800 text-xs font-medium mb-3 px-2.5 py-0.5 rounded">Tersedia</div>
-                            <span class="text-blue-800 font-bold">Rp. {{ number_format($kendaraan->harga_sewa) }}</span>
                         </div>
                     </div>
                     @else

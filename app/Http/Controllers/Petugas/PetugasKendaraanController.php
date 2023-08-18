@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Petugas;
 
+use App\Http\Controllers\Controller;
 use App\Models\Kendaraan;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class KendaraanController extends Controller
+class PetugasKendaraanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +19,7 @@ class KendaraanController extends Controller
         
         $kendaraans = Kendaraan::paginate(10);
         
-        return view('administrasi.kendaraan.index', ['kendaraans' => $kendaraans]);
+        return view('petugas.kendaraan.index', ['kendaraans' => $kendaraans]);
     }
 
     /**
@@ -26,7 +27,7 @@ class KendaraanController extends Controller
      */
     public function create()
     {
-        return view('administrasi.kendaraan.create');
+        return view('petugas.kendaraan.create');
     }
 
     /**
@@ -66,7 +67,7 @@ class KendaraanController extends Controller
     {
         $kendaraan = Kendaraan::find($id);
 
-        return view('administrasi.kendaraan.edit', [
+        return view('petugas.kendaraan.edit', [
             'kendaraan' => $kendaraan
         ]);
     }

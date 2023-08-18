@@ -9,7 +9,7 @@ class Pengembalian extends Model
 {
     use HasFactory; 
     
-    protected $fillable = ['petugas_id', 'tanggal_kembali', 'sisa_bayar', 'denda'];
+    protected $fillable = ['petugas_id', 'tanggal_kembali', 'sisa_bayar', 'denda', 'catatan'];
 
     public function petugas()
     {

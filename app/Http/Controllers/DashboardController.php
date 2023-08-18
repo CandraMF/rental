@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        return view('administrasi.dashboard');
     }
 
     public function member()

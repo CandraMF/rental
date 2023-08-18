@@ -19,8 +19,7 @@ class PetugasPenyewaanController extends Controller
     public function index()
     {
         $penyewaans = Penyewaan::with(['petugas', 'member', 'pengembalian', 'kendaraan:id,nama_kendaraan,plat_nomor,status'])
-            ->where('status', 1)
-            ->where('petugas_id', Auth::user()->petugas->id)
+            ->where('status', 0)
             ->paginate(10);
 
         return view('petugas.penyewaan.index', ['penyewaans' => $penyewaans]);
@@ -106,5 +105,22 @@ class PetugasPenyewaanController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function changeStatus(string $id, string $status)
+    {
+        $penyewaan = Penyewaan::find($id);
+
+        $penyewaan->update([
+            'status' => $status
+        ]);
+
+        $penyewaan->kendaraan->update([
+            'status' => 0,
+        ]);
+
+        return redirect()->back()->with([
+            'status' => 'status-changed',
+        ]);
     }
 }

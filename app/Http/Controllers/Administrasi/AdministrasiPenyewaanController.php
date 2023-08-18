@@ -7,6 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\Member;
 use App\Models\Pengembalian;
 use App\Models\Penyewaan;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,8 @@ class AdministrasiPenyewaanController extends Controller
     public function index()
     {
         $penyewaans = Penyewaan::with(['petugas', 'member', 'pengembalian', 'kendaraan:id,nama_kendaraan,plat_nomor,status'])
-            ->where('status', 1)
             ->where('petugas_id', Auth::user()->petugas->id)
+            ->orderBy('status')
             ->paginate(10);
 
         return view('administrasi.penyewaan.index', ['penyewaans' => $penyewaans]);
@@ -31,7 +32,7 @@ class AdministrasiPenyewaanController extends Controller
      */
     public function create()
     {
-        $kendaraans = Kendaraan::orderBy('status')->get();
+        $kendaraans = Kendaraan::orderBy('status', 'desc')->get();
         $members = Member::with('user')->orderBy('nama')->get();
 
         return view('administrasi.penyewaan.create', [
@@ -68,7 +69,11 @@ class AdministrasiPenyewaanController extends Controller
             'uang_muka' =>  $request->uang_muka,
             'tanggal_sewa' => now(),
             'pengembalian_id' => $pengembalian->id,
-            'status' => 1,
+            'status' => 0,
+        ]);
+
+        $penyewaan->kendaraan->update([
+            'status' => 2,
         ]);
 
         return redirect(route('admin.penyewaan.index'))->with([
@@ -106,5 +111,46 @@ class AdministrasiPenyewaanController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function cetakKwitansi(string $id)
+    {
+        $penyewaan = Penyewaan::with(['petugas', 'member', 'pengembalian', 'kendaraan'])
+            ->find($id);
+
+        $pdf = PDF::loadView('pdf.uang_muka', compact('penyewaan'));
+
+        $pdf->setPaper('A4', 'landscape');
+
+        return $pdf->stream();
+
+        // return $pdf->download('disney.pdf');
+    }
+
+    public function cetakKwitansiDenda(string $id)
+    {
+        $penyewaan = Penyewaan::with(['petugas', 'member', 'pengembalian', 'kendaraan'])
+            ->find($id);
+
+        $pdf = PDF::loadView('pdf.denda', compact('penyewaan'));
+
+        $pdf->setPaper('A4', 'landscape');
+
+        return $pdf->stream();
+
+        // return $pdf->download('disney.pdf');
+    }
+
+    public function selesaikan(string $id)
+    {
+        $penyewaan = Penyewaan::find($id);
+
+        $penyewaan->update([
+            'status' => 2,
+        ]); 
+
+        return redirect(route('admin.penyewaan.index'))->with([
+            'status' => 'updated',
+        ]);
     }
 }

@@ -23,7 +23,7 @@ class PenyewaanController extends Controller
             ->where('status', 0)
             ->paginate(10);
 
-        return view('admin.penyewaan.index', ['penyewaans' => $penyewaans]);
+        return view('administrasi.penyewaan.index', ['penyewaans' => $penyewaans]);
     }
 
     /**
@@ -31,7 +31,7 @@ class PenyewaanController extends Controller
      */
     public function create()
     {
-        return view('admin.penyewaan.create');
+        return view('administrasi.penyewaan.create');
     }
 
     /**
@@ -71,7 +71,7 @@ class PenyewaanController extends Controller
     {
         $penyewaan = Penyewaan::find($id);
 
-        return view('admin.penyewaan.edit', [
+        return view('administrasi.penyewaan.edit', [
             'penyewaan' => $penyewaan
         ]);
     }

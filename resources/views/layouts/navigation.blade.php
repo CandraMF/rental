@@ -15,14 +15,8 @@
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.kendaraan.index')" :active="request()->routeIs('admin.kendaraan.index')">
-                        {{ __('Kendaraan') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('admin.petugas.index')" :active="request()->routeIs('admin.petugas.index')">
                         {{ __('Petugas') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.member.index')" :active="request()->routeIs('admin.member.index')">
-                        {{ __('Member') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.penyewaan.index')" :active="request()->routeIs('admin.penyewaan.index')">
                         {{ __('Penyewaan') }}
@@ -81,14 +75,8 @@
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.kendaraan.index')" :active="request()->routeIs('admin.kendaraan.index')">
-                {{ __('Kendaraan') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.petugas.index')" :active="request()->routeIs('admin.petugas.index')">
                 {{ __('Petugas') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.member.index')" :active="request()->routeIs('admin.member.index')">
-                {{ __('Member') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.penyewaan.index')" :active="request()->routeIs('admin.penyewaan.index')">
                 {{ __('Penyewaan') }}
