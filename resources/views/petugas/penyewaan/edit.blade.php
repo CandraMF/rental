@@ -34,7 +34,7 @@
                         </div>
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Simpan') }}</x-primary-button>
-                            <a href="{{ route('admin.kendaraan.index') }}">
+                            <a href="{{ route('petugas.penyewaan.index') }}">
                                 <x-secondary-button type="button">{{ __('Cancel') }}</x-secondary-button>
                             </a>
                         </div>

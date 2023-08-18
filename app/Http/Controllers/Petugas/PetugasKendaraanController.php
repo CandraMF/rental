@@ -46,7 +46,7 @@ class PetugasKendaraanController extends Controller
 
         $kendaraan = Kendaraan::create($validated);
 
-        return redirect(route('admin.kendaraan.index'))->with([
+        return redirect(route('petugas.kendaraan.index'))->with([
             'status' => 'saved'
         ]);
 
@@ -89,7 +89,7 @@ class PetugasKendaraanController extends Controller
 
         $kendaraan->update($validated);
         
-        return redirect(route('admin.kendaraan.index'))->with([
+        return redirect(route('petugas.kendaraan.index'))->with([
             'status' => 'updated'
         ]);
     }
