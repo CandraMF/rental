@@ -141,13 +141,34 @@ class AdministrasiPenyewaanController extends Controller
         // return $pdf->download('disney.pdf');
     }
 
+    public function cetakLaporan($bulan, $tahun)
+    {
+        $penyewaans = Penyewaan::with(['petugas', 'member', 'pengembalian', 'kendaraan'])
+            ->whereYear('tanggal_sewa', $tahun)
+            ->orderBy('status', 'desc')
+            ->orderBy('tanggal_sewa');
+
+
+        if ($bulan != 'all') {
+            $penyewaans = $penyewaans->whereMonth('tanggal_sewa', $bulan);
+        }
+
+        $penyewaans = $penyewaans->get();
+
+        $pdf = PDF::loadView('pdf.laporan', compact('penyewaans', 'bulan', 'tahun'));
+
+        $pdf->setPaper('A4', 'landscape');
+
+        return $pdf->stream();
+    }
+
     public function selesaikan(string $id)
     {
         $penyewaan = Penyewaan::find($id);
 
         $penyewaan->update([
             'status' => 2,
-        ]); 
+        ]);
 
         return redirect(route('admin.penyewaan.index'))->with([
             'status' => 'updated',

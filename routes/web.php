@@ -98,7 +98,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/penyewaan/cetak-kwitansi/{id}',[AdministrasiPenyewaanController::class, 'cetakKwitansi'])->name('penyewaan.cetak-kwitansi');
         Route::get('/penyewaan/cetak-kwitansi-denda/{id}',[AdministrasiPenyewaanController::class, 'cetakKwitansiDenda'])->name('penyewaan.cetak-kwitansi-denda');
-        Route::get('/penyewaan/cetak-laporan/all/{bulan}/{tahun}',[AdministrasiPenyewaanController::class, 'index'])->name('penyewaan.export-excel.all');
+        Route::get('/penyewaan/cetak-laporan/all/{tahun}/{bulan}',[AdministrasiPenyewaanController::class, 'cetakLaporan'])->name('penyewaan.cetak-laporan');
 
         Route::get('/penyewaan/{id}/selesaikan', [AdministrasiPenyewaanController::class, 'selesaikan'])->name('penyewaan.selesaikan');
 
