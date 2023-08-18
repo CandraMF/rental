@@ -13,12 +13,12 @@ class Penyewaan extends Model
 
     public function member()
     {
-        return $this->belongsTo(User::class, 'member_id', 'id');
+        return $this->belongsTo(Member::class, 'member_id', 'id');
     }
 
     public function petugas()
     {
-        return $this->belongsTo(User::class, 'petugas_id', 'id');
+        return $this->belongsTo(Petugas::class, 'petugas_id', 'id');
     }
 
     public function kendaraan()

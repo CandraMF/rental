@@ -27,9 +27,6 @@
                     <x-nav-link :href="route('admin.penyewaan.index')" :active="request()->routeIs('admin.penyewaan.index')">
                         {{ __('Penyewaan') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
-                        {{ __('User') }}
-                    </x-nav-link>
                 </div>
             </div>
 
@@ -95,9 +92,6 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.penyewaan.index')" :active="request()->routeIs('admin.penyewaan.index')">
                 {{ __('Penyewaan') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
-                {{ __('User') }}
             </x-responsive-nav-link>
         </div>
 

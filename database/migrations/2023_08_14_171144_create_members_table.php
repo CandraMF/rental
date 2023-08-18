@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('no_telp');
             $table->date('ttl');
             $table->text('alamat');
+            $table->string('kartu_member')->nullable();
             $table->timestamps();
         });
     }

@@ -4,10 +4,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\Member\MemberPenyewaanController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\PenyewaanController;
+use App\Http\Controllers\Administrasi\AdministrasiPenyewaanController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +30,28 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::middleware(['role:admin', 'verified'])->prefix('/admin')->name('admin.')->group(function () {
+    Route::middleware(['role:member'])->prefix('/member')->name('member.')->group(function () {
+        Route::get('/', [DashboardController::class, 'member'])->name('dashboard');
+
+        Route::get('/penyewaan', [MemberPenyewaanController::class, 'index'])->name('penyewaan.index');
+        Route::get('/penyewaan/create', [MemberPenyewaanController::class, 'create'])->name('penyewaan.create');
+        Route::post('/penyewaan/store', [MemberPenyewaanController::class, 'store'])->name('penyewaan.store');
+        Route::get('/penyewaan/{id}', [MemberPenyewaanController::class, 'show'])->name('penyewaan.show');
+        Route::get('/penyewaan/{id}/edit', [MemberPenyewaanController::class, 'edit'])->name('penyewaan.edit');
+        Route::post('/penyewaan/{id}/update', [MemberPenyewaanController::class, 'update'])->name('penyewaan.update');
+        Route::delete('/penyewaan/{id}', [MemberPenyewaanController::class, 'destroy'])->name('penyewaan.destroy');
+    });
+    
+    Route::middleware(['role:admin'])->prefix('/admin')->name('admin.')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/penyewaan', [AdministrasiPenyewaanController::class, 'index'])->name('penyewaan.index');
+        Route::get('/penyewaan/create', [AdministrasiPenyewaanController::class, 'create'])->name('penyewaan.create');
+        Route::post('/penyewaan/store', [AdministrasiPenyewaanController::class, 'store'])->name('penyewaan.store');
+        Route::get('/penyewaan/{id}', [AdministrasiPenyewaanController::class, 'show'])->name('penyewaan.show');
+        Route::get('/penyewaan/{id}/edit', [AdministrasiPenyewaanController::class, 'edit'])->name('penyewaan.edit');
+        Route::post('/penyewaan/{id}/update', [AdministrasiPenyewaanController::class, 'update'])->name('penyewaan.update');
+        Route::delete('/penyewaan/{id}', [AdministrasiPenyewaanController::class, 'destroy'])->name('penyewaan.destroy');
 
         Route::get('/kendaraan', [KendaraanController::class, 'index'])->name('kendaraan.index');
         Route::get('/kendaraan/create', [KendaraanController::class, 'create'])->name('kendaraan.create');
@@ -57,40 +77,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/member/{id}/update', [MemberController::class, 'update'])->name('member.update');
         Route::delete('/member/{id}', [MemberController::class, 'destroy'])->name('member.destroy');
 
-        Route::get('/penyewaan', [PenyewaanController::class, 'index'])->name('penyewaan.index');
-        Route::get('/penyewaan/create', [PenyewaanController::class, 'create'])->name('penyewaan.create');
-        Route::post('/penyewaan/store', [PenyewaanController::class, 'store'])->name('penyewaan.store');
-        Route::get('/penyewaan/{id}', [PenyewaanController::class, 'show'])->name('penyewaan.show');
-        Route::get('/penyewaan/{id}/edit', [PenyewaanController::class, 'edit'])->name('penyewaan.edit');
-        Route::post('/penyewaan/{id}/update', [PenyewaanController::class, 'update'])->name('penyewaan.update');
-        Route::delete('/penyewaan/{id}', [PenyewaanController::class, 'destroy'])->name('penyewaan.destroy');
-
-        Route::post('/penyewaan/terima', [PenyewaanController::class, 'terima'])->name('penyewaan.terima');
-        Route::post('/penyewaan/tolak', [PenyewaanController::class, 'tolak'])->name('penyewaan.tolak');
-
-        Route::get('/user', [UserController::class, 'index'])->name('user.index');
-        Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-        Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
-        Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
-        Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-        Route::post('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
-        Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-    });
-
-    Route::middleware(['role:member'])->prefix('/member')->name('member.')->group(function () {
-        Route::get('/', [DashboardController::class, 'member'])->name('dashboard');
-
-        Route::get('/penyewaan', [MemberPenyewaanController::class, 'index'])->name('penyewaan.index');
-        Route::get('/penyewaan/create', [MemberPenyewaanController::class, 'create'])->name('penyewaan.create');
-        Route::post('/penyewaan/store', [MemberPenyewaanController::class, 'store'])->name('penyewaan.store');
-        Route::get('/penyewaan/{id}', [MemberPenyewaanController::class, 'show'])->name('penyewaan.show');
-        Route::get('/penyewaan/{id}/edit', [MemberPenyewaanController::class, 'edit'])->name('penyewaan.edit');
-        Route::post('/penyewaan/{id}/update', [MemberPenyewaanController::class, 'update'])->name('penyewaan.update');
-        Route::delete('/penyewaan/{id}', [MemberPenyewaanController::class, 'destroy'])->name('penyewaan.destroy');
-    });
-
-    Route::middleware(['role:petugas'])->prefix('/petugas')->name('petugas.')->group(function () {
-        Route::get('/', [DashboardController::class, 'petugas'])->name('dashboard');
     });
 });
 

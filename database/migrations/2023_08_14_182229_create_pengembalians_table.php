@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('pengembalians', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('petugas_id')->unsigned();
-            $table->date('tanggal_kembali');
+            $table->bigInteger('petugas_id')->nullable()->unsigned();
+            $table->date('tanggal_kembali')->nullable();
             $table->integer('sisa_bayar');
             $table->integer('denda')->nullable();
+            $table->text('catatan')->nullable();
+            $table->string('kuitansi_denda')->nullable();
             $table->timestamps();
 
-            $table->foreign('petugas_id')->references('id')->on('users');
+            $table->foreign('petugas_id')->references('id')->on('petugas');
         });
     }
 

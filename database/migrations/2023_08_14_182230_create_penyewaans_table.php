@@ -21,10 +21,11 @@ return new class extends Migration
             $table->integer('lama_sewa');
             $table->integer('total_bayar');
             $table->integer('uang_muka');
+            $table->string('kuitansi')->nullable();
             $table->timestamps();
 
-            $table->foreign('member_id')->references('id')->on('users');
-            $table->foreign('petugas_id')->references('id')->on('users');
+            $table->foreign('member_id')->references('id')->on('members');
+            $table->foreign('petugas_id')->references('id')->on('petugas');
         });
     }
 
