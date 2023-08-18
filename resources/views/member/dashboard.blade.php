@@ -44,15 +44,7 @@
             @endif
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg flex flex-col">
-                <!-- <div class="flex justify-between">
-                    <div>
-                        <x-text-input id="email" name="email" type="email" class="block w-full" required autocomplete="search" placeholder="search" />
-                        <x-input-error class="mt-2" :messages="$errors->get('email')" />
-                    </div>
-                    <a href="{{ route('admin.kendaraan.create') }}">
-                        <x-primary-button>{{ __('Tambah Data') }}</x-primary-button>
-                    </a>
-                </div> -->
+                
                 <div class="mt-5 relative overflow-x-auto">
                     <table class=" w-full text-sm text-left text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">

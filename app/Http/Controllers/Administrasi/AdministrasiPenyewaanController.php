@@ -32,7 +32,7 @@ class AdministrasiPenyewaanController extends Controller
      */
     public function create()
     {
-        $kendaraans = Kendaraan::orderBy('status', 'desc')->get();
+        $kendaraans = Kendaraan::orderBy('status')->get();
         $members = Member::with('user')->orderBy('nama')->get();
 
         return view('administrasi.penyewaan.create', [

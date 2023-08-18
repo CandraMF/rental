@@ -35,15 +35,21 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'no_ktp' => ['required', 'unique:'.Member::class],
+            'no_sim' => ['required', 'unique:'.Member::class],
+            'no_telp' => ['required', 'unique:'.Member::class],
+            'ttl' => ['required'],
+            'alamat' => ['required', 'max:255'],
+            'alamat' => ['required', 'max:255'],
         ]);
 
         $member = Member::create([
             'nama' => $request->name,
-            'no_ktp' => '1',
-            'no_sim' => '1',
-            'no_telp' => '1',
-            'ttl' => '2021-01-01',
-            'alamat' => 'alamat'
+            'no_ktp' => $request->no_ktp,
+            'no_sim' => $request->no_sim,
+            'no_telp' => $request->no_telp,
+            'ttl' => $request->ttl,
+            'alamat' => $request->alamat,
         ]);
 
         $user = User::create([

@@ -80,6 +80,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/member/{id}/edit', [PetugasMemberController::class, 'edit'])->name('member.edit');
         Route::post('/member/{id}/update', [PetugasMemberController::class, 'update'])->name('member.update');
         Route::delete('/member/{id}', [PetugasMemberController::class, 'destroy'])->name('member.destroy');
+
+        Route::get('/member/cetak-kartu/{id}', [PetugasMemberController::class, 'cetakKartu'])->name('member.cetak-kartu');
         
     });
     
@@ -96,7 +98,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/penyewaan/cetak-kwitansi/{id}',[AdministrasiPenyewaanController::class, 'cetakKwitansi'])->name('penyewaan.cetak-kwitansi');
         Route::get('/penyewaan/cetak-kwitansi-denda/{id}',[AdministrasiPenyewaanController::class, 'cetakKwitansiDenda'])->name('penyewaan.cetak-kwitansi-denda');
-        Route::get('/penyewaan/export-excel/all/{bulan}/{tahun}',[AdministrasiPenyewaanController::class, 'index'])->name('penyewaan.export-excel.all');
+        Route::get('/penyewaan/cetak-laporan/all/{bulan}/{tahun}',[AdministrasiPenyewaanController::class, 'index'])->name('penyewaan.export-excel.all');
 
         Route::get('/penyewaan/{id}/selesaikan', [AdministrasiPenyewaanController::class, 'selesaikan'])->name('penyewaan.selesaikan');
 
